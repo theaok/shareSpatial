@@ -24,9 +24,16 @@ la var VCO3 "month"
 la var VCO4 "week" 
 la var VCO5 "day"
 
+ta cs
+preserve
+collapse (first) iso (count) count=ls, by(cs)
+format count %9.0gc
+l
+restore
 
 **** descriptive stats
 
+//lm: note: these are linux commands below with ! --just does bunch of descriptive stats, can ignore this
  
 rm /tmp/a.txt
 levelsof iso, loc(iso) 
@@ -67,8 +74,26 @@ coefplot `line',  bycoefs byopts(xrescale)     //byopts(compact cols(1))
 dy
 gr export `tmp'volCha-volChaOft-means.pdf,replace
 
+rm /tmp/a.txt
+levelsof iso, loc(iso) 
+foreach i in `iso'{ 
+sum  volCha  if iso=="`i'" //did sum; dont know hwo to get mean in macro from moean
+loc beta= r(mean)
+mean   volCha ghto  if iso=="`i'" //guess need to run mean for est sto to work
+est sto `i'
+! echo `beta' , `i' "||" >> /tmp/a.txt
+}
+! sort -k1 -n -t "," /tmp/a.txt>/tmp/sort.txt
+! cut -f1 -d"," --complement /tmp/sort.txt > /tmp/z.txt
+! cat /tmp/z.txt | tr '\n' ' ' > /tmp/z2.txt
+file open myfile using "/tmp/z2.txt", read 
+file read myfile line
+file close myfile
+coefplot `line',  bycoefs byopts(xrescale)     //byopts(compact cols(1))
+dy
+gr export `tmp'volCha-ghto-means.pdf,replace
 
-//TODO think about these below and giess add some to paper!
+
 
 //rhfo
 rm /tmp/a.txt
@@ -88,6 +113,7 @@ file read myfile line
 file close myfile
 coefplot `line',  bycoefs byopts(xrescale  row(1)) //byopts(compact cols(1))
 dy 
+gr export `tmp'ghto-ghih-volCha-means.pdf,replace
 
 
 
@@ -108,6 +134,7 @@ file read myfile line
 file close myfile
 coefplot `line',  bycoefs byopts(xrescale  row(1)) //byopts(compact cols(1))
 dy 
+gr export `tmp'casp-ghto-means.pdf,replace
 
 
 
@@ -128,6 +155,7 @@ file read myfile line
 file close myfile
 coefplot `line',  bycoefs byopts(xrescale  row(1)) //byopts(compact cols(1))
 dy 
+gr export `tmp'casp-volCha-means.pdf,replace
 
 
 rm /tmp/a.txt

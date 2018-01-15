@@ -4,6 +4,8 @@
 \usepackage[margin=.1cm,font=small,labelfont=bf]{caption}[2007/03/09]
 %\usepackage{endnotes}
 %\let\footnote=\endnote
+
+
 \usepackage{setspace}
 \usepackage{longtable}                        
 \usepackage{anysize}                          
@@ -13,9 +15,8 @@
 \usepackage{amsmath}
 \usepackage[% draft,
 pdftex]{graphicx} %draft is a way to exclude figures                
-\usepackage{epstopdf}
+%\usepackage{epstopdf}
 \usepackage{hyperref}                             % For creating hyperlinks in cross references
-
  
 % \usepackage[margins]{trackchanges}
 
@@ -56,6 +57,10 @@ pdftex]{graphicx} %draft is a way to exclude figures
 
 
 %-------------------- extra options -----------------------------------------
+
+\usepackage{pdfpages} %load after xcolor, like at the end ideally i guess and
+                      %turn off epstopdf
+
 
 %%%%%%%%%%%%%
 % footnotes %
@@ -266,10 +271,54 @@ visualizations--pretty cool by Morten Wahrendorf:
 \url{http://www.wahrendorf.de/lifecourses/map_1.html}
 
 
+%FROM lm docx: info dla adama
+Haski (2009) as the main reference. A list of empirical papers on volunteerism among elderly (Erlinghagen and Hank, 2006; Wahlendorf and Siegriest, ?)
+Main findings in Haski (2009)
+positive relation between volunteering and physical and psychological well-being.
+volunteering rates differ among countries  in the way known from earlier studies - the highest rates in Northern Europe and the lowest rates in Southern Europe
+volunteering influences perceived health and life satisfaction  differently in different countries
+puzzle : no clear relation between impact of volunteering on health and quality of life and extend of volunteering (Italy compared with the Netherlands) in the wave 1 of SHARE
+Research question (robustness check) -- Is it possible to find association between extend of volunteering and health and quality of life using different data (SHARE wave 6 instead of SHARE wave 1) 
+ Extensions in our paper
+Wave 6 instead of wave 1
+New formulation of question on volunteering (12 months instead of 4 weeks)
+New countries (Eastern Europe)
+New measure of association between popularity of volunteering and its relation to subjective health and life satisfaction (Kendall's tau-b instead of Pearson's correlation)
+New measure for life satisfaction ( casp instead of 4 point Likert scale)
+Summary of results 
+
+
+
 \section{Data}
 
 Using the most recent wave 6--the adbantage that the very wide country coverage:
 18 countries!
+
+     |             cs   iso   count |
+     |------------------------------|
+  1. |        Austria   AUT   3,073 |
+  2. |        Belgium   BEL   5,466 |
+  3. |        Croatia   HRV   2,386 |
+  4. | Czech Republic   CZE   4,568 |
+  5. |        Denmark   DNK   3,591 |
+     |------------------------------|
+  6. |        Estonia   EST   5,111 |
+  7. |         France   FRA   3,720 |
+  8. |        Germany   DEU   4,231 |
+  9. |         Greece   GRC   4,680 |
+ 10. |         Israel   ISR   1,781 |
+     |------------------------------|
+ 11. |          Italy   ITA   4,908 |
+ 12. |     Luxembourg   LUX   1,461 |
+ 13. |         Poland   POL   1,719 |
+ 14. |       Portugal   PRT   1,472 |
+ 15. |       Slovenia   SVN   4,007 |
+     |------------------------------|
+ 16. |          Spain   ESP   4,962 |
+ 17. |         Sweden   SWE   3,771 |
+ 18. |    Switzerland   CHE   2,722 |
+     +------------------------------+
+
 
 mostly copied from the other one
 
@@ -314,6 +363,14 @@ some notable differences shown in figure \ref{ls-casp-means}.
 %relating to lm ideas
 So we also fins as in \citet{haski09} that highest volunteering is in Northern
 counrties and lowest in Southern and effect differs by country
+
+volunteeringh and frq of volunteering are closely related in fig \ref{volCha-volChaOft-means}
+
+\begin{figure}[H]
+ \includegraphics[height=3in]{tmp/volCha-volChaOft-means.pdf}\centering\label{volCha-volChaOft-means}
+\caption{}
+\end{figure}
+
 
 
 in fig \ref{reg-volCha}
@@ -438,18 +495,22 @@ see supplemetary material as opposed to see appendix!
 % % \end{scriptsize}
 % % \end{table}
 
-volunteeringh and frq of volunteering are closely related in fig \ref{volCha-volChaOft-means}
-
-\begin{figure}[H]
- \includegraphics[height=3in]{tmp/volCha-volChaOft-means.pdf}\centering\label{volCha-volChaOft-means}
-\caption{}
-\end{figure}
 
 the poorer the country, the more the pension matter in fig \ref{pen-means}
 
 \begin{figure}[H]
  \includegraphics[height=3in]{tmp/pen-means.pdf}\centering\label{pen-means}
 \caption{note: dropped CZE--it has some weird stange big value!}
+\end{figure}
+
+some positive relationship between volunteering and helping others in
+\ref{volCha-ghto-means}, but even more irregulatrities; and it is not cearly so
+that volunteering rises from south to north; and even less clear or opposite
+that ghto rises from north to south
+
+\begin{figure}[H]
+ \includegraphics[height=3in]{tmp/volCha-ghto-means.pdf}\centering\label{volCha-ghto-means}
+\caption{}
 \end{figure}
 
 
@@ -475,7 +536,9 @@ the poorer the country, the more the pension matter in fig \ref{pen-means}
 %\theendnotes
 \bibliography{/home/aok/papers/root/tex/ebib.bib,../tex-socTraSocCap/socTraSocCap.bib}
 
+\section{initial outline by one of the authors (lm)}
 
+\includepdf[pages={-}]{tmp/Info_dla_Adama.pdf}
 
 \end{spacing}
 \end{document}
